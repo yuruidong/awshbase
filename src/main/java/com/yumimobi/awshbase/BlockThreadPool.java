@@ -42,7 +42,7 @@ public class BlockThreadPool {
         }
     }
     
-    public Integer getActiveCount() {
+    public Integer getQueueSize() {
         
         return pool.getQueue().size();
     }
@@ -78,7 +78,7 @@ public class BlockThreadPool {
     public static void main(String[] args) {
         BlockThreadPool pool = new BlockThreadPool(3);
         for (int i = 1; i < 20; i++) {
-            System.out.println("getActiveCount:"+pool.getActiveCount());
+            System.out.println("getQueueSize:"+pool.getQueueSize());
             System.out.println("提交第" + i + "个任务!");
             pool.execute(new Runnable() {
                 @Override
@@ -99,8 +99,8 @@ public class BlockThreadPool {
         /*while (pool.getActiveCount() == 3 ) {
             pool.destory();
         }*/
-        while (pool.getActiveCount()>0) {
-            System.out.println("getQueue().size:"+pool.getActiveCount());
+        while (pool.getQueueSize()>0) {
+            System.out.println("getQueue().size:"+pool.getQueueSize());
             try {
                 Thread.sleep(10000);
             } catch (InterruptedException ex) {
